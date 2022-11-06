@@ -2,6 +2,7 @@ import axios from 'axios';
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const setFilterTerm = createAction('phonebook/setFilterTerm');
+axios.defaults.baseURL = 'https://636817a0d1d09a8fa6209629.mockapi.io/';
 
 export const getContatcts = createAsyncThunk(
   'contacts/getContacts',
