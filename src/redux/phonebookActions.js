@@ -2,15 +2,17 @@ import axios from 'axios';
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const setFilterTerm = createAction('phonebook/setFilterTerm');
-axios.defaults.baseURL = 'https://636817a0d1d09a8fa6209629.mockapi.io/';
+
+axios.defaults.baseURL = 'https://6368ef0828cd16bba7104b38.mockapi.io';
 
 export const getContatcts = createAsyncThunk(
   'contacts/getContacts',
   async (_, { rejectWithValue }) => {
     try {
-      const {data} = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/contacts`
-      );
+      const { data } = await axios('/contacts')
+      // const {data} = await axios.get(
+      //   `${process.env.REACT_APP_BASE_URL}/contacts`
+      //);
       return data;
     } catch (err) {
       return rejectWithValue(err);
@@ -22,7 +24,7 @@ export const deleteContact = createAsyncThunk(
   async (contactId, { rejectWithValue }) => {
     try {
       const {data} = await axios.delete(
-        `${process.env.REACT_APP_BASE_URL}/contacts/${contactId}`,
+        `/contacts/${contactId}`,
       );
       return data;
     } catch (err) {
@@ -35,7 +37,7 @@ export const addContact = createAsyncThunk(
   async (body, { rejectWithValue }) => {
     try {
       const {data} = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/contacts`,
+        `/contacts`,
         {
           body: JSON.stringify(body),
         }

@@ -14,7 +14,8 @@ const initialState = {
   error: null,
 };
 
-export default createReducer(initialState, {
+export default createReducer(
+  initialState, {
   [setFilterTerm]: (state, action) => {
     state.filterTerm = action.payload;
   },//getContatcts

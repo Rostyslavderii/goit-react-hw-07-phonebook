@@ -11,11 +11,12 @@ const ContactList = ({ contacts, onDelete }) => {
       <ul className="contacts">
         {contacts.length > 0 &&
           contacts.map(({ id, name, number }) => {
+            console.log('GO', number);
             return (
               <ContactItem
                 key={id}
                 name={name}
-                nubmer={number}
+                number={number}
                 id={id}
                 onDelete={onDelete}
               />
