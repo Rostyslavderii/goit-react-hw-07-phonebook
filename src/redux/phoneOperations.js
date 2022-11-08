@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 
-export const setFilterTerm = createAction('phonebook/setFilterTerm');
+
 
 axios.defaults.baseURL = 'https://6368ef0828cd16bba7104b38.mockapi.io';
 
@@ -10,9 +10,6 @@ export const getContatcts = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const { data } = await axios('/contacts')
-      // const {data} = await axios.get(
-      //   `${process.env.REACT_APP_BASE_URL}/contacts`
-      //);
       return data;
     } catch (err) {
       return rejectWithValue(err);

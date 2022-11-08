@@ -1,26 +1,15 @@
 import { useEffect } from 'react';
 import { nanoid } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  addContact,
-  getContatcts,
-  deleteContact,
-  setFilterTerm,
-} from 'redux/phonebookActions';
+import { setFilter } from 'redux/setFilter';
+import { addContact, getContatcts, deleteContact } from 'redux/phoneOperations';
 
 import { Filter, ContactList, Section, ContactForm } from './components';
-
-// const INITIAL_CONTACTS_LIST = [
-//   { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-//   { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-//   { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-//   { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-// ];
 
 const App = () => {
   const dispatch = useDispatch();
   const { contacts, filterTerm, isFetching, error } = useSelector(
-    state => state.phonebook
+    state => state.contacts
   );
 
   useEffect(() => {
@@ -45,7 +34,7 @@ const App = () => {
   };
 
   const handleFilterContactsByName = ({ target: { value } }) => {
-    dispatch(setFilterTerm(value));
+    dispatch(setFilter(value));
   };
 
   const checkNewContactPresence = contactName => {
