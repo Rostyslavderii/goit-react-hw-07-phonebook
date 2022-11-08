@@ -1,7 +1,6 @@
 import React from 'react';
 
 export const ContactItem = ({ id, onDelete, name, number }) => {
-  console.log(number);
   return (
     <li className="contact">
       <span className="contact-name">{name}</span>:&nbsp;{number}

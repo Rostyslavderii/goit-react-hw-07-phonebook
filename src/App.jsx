@@ -1,16 +1,19 @@
 import { useEffect } from 'react';
 import { nanoid } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
-import { setFilter } from 'redux/setFilter';
+import { setFilter } from 'redux/filterSlice';
 import { addContact, getContatcts, deleteContact } from 'redux/phoneOperations';
 
 import { Filter, ContactList, Section, ContactForm } from './components';
 
 const App = () => {
   const dispatch = useDispatch();
-  const { contacts, filterTerm, isFetching, error } = useSelector(
-    state => state.contacts
-  );
+  const { contacts, isFetching, error } = useSelector(state => state.contacts);
+
+  const filter = useSelector(state => {
+    console.log(state);
+    return state.filter.filter;
+  });
 
   useEffect(() => {
     dispatch(getContatcts());
@@ -35,6 +38,7 @@ const App = () => {
 
   const handleFilterContactsByName = ({ target: { value } }) => {
     dispatch(setFilter(value));
+    console.log('GO', value);
   };
 
   const checkNewContactPresence = contactName => {
@@ -42,7 +46,7 @@ const App = () => {
   };
 
   const contactsFilteredByName = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(filterTerm.toLowerCase())
+    contact.name.toLowerCase().includes(filter.toLowerCase())
   );
 
   return (
@@ -51,10 +55,10 @@ const App = () => {
         <ContactForm addContact={handleAddContact} />
       </Section>
       <Section title="Contacts">
-        <Filter filter={filterTerm} onChange={handleFilterContactsByName} />
+        <Filter filter={filter} onChange={handleFilterContactsByName} />
         <ContactList
           contacts={contactsFilteredByName}
-          filter={filterTerm}
+          filter={filter}
           isFetching={isFetching}
           onDelete={handleDeleteContact}
         />
