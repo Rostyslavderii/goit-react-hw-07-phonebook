@@ -12,7 +12,7 @@ const filterSlice = createSlice({
     },
 
 
-   // [setFilter]: (state, action) => {state.filter = action.payload;
+  // [setFilter]: (state, action) => {state.filter = action.payload;
 
   },
 })
